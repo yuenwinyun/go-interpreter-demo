@@ -1,7 +1,7 @@
 package ast
 
 import (
-	"go-interpreter-demo/token"
+	"go-interpreter-demo/core/token"
 	"testing"
 )
 
@@ -14,10 +14,7 @@ func TestString(t *testing.T) {
 					Literal: "let",
 				},
 				Name: &Identifier{
-					Token: token.Token{
-						Type:    token.IDENT,
-						Literal: "myVar",
-					},
+					Token: token.Token{Type: token.IDENT, Literal: "myVar"},
 					Value: "myVar",
 				},
 				Value: &Identifier{
@@ -28,9 +25,7 @@ func TestString(t *testing.T) {
 		},
 	}
 
-	expectedCode := "let myVar = anotherVar;"
-
-	if program.String() != expectedCode {
-		t.Errorf("wrong parsed program, got=%q, expected=%q", program.String(), expectedCode)
+	if program.String() != "let myVar = anotherVar;" {
+		t.Errorf("program.String() wrong. got=%q", program.String())
 	}
 }

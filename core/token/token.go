@@ -3,49 +3,56 @@ package token
 const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
+	IDENT   = "IDENT"
 	INT     = "INT"
 
 	ASSIGN   = "="
 	PLUS     = "+"
 	MINUS    = "-"
-	NOT      = "!"
+	BANG     = "!"
 	ASTERISK = "*"
 	SLASH    = "/"
 	GT       = ">"
 	LT       = "<"
-	EQ       = "=="
 	NOT_EQ   = "!="
+	EQ       = "=="
 
 	COMMA     = ","
 	SEMICOLON = ";"
 	LPAREN    = "("
 	RPAREN    = ")"
-	LBRACE    = "{"
-	RBRACE    = "}"
+	LBRACKET  = "{"
+	RBRACKET  = "}"
 
-	FUNCTION = "FUNCTION"
 	LET      = "LET"
-	TRUE     = "TRUE"
-	FALSE    = "FALSE"
+	FUNCTION = "FUNCTION"
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
-	IDENT    = "IDENT"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
 )
 
-type Type string
+type TokenType string
 
 type Token struct {
-	Type    Type
+	Type    TokenType
 	Literal string
 }
 
-var builtInKeyWords = map[string]Type{
+var keywords = map[string]TokenType{
 	"fn":     FUNCTION,
 	"let":    LET,
-	"true":   TRUE,
-	"false":  FALSE,
 	"if":     IF,
 	"else":   ELSE,
 	"return": RETURN,
+	"true":   TRUE,
+	"false":  FALSE,
+}
+
+func LookupIdentifier(identifier string) TokenType {
+	if tok, ok := keywords[identifier]; ok {
+		return tok
+	}
+	return IDENT
 }

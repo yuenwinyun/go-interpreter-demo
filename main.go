@@ -2,17 +2,17 @@ package main
 
 import (
 	"fmt"
-	"go-interpreter-demo/repl"
+	"go-interpreter-demo/core/repl"
 	"os"
 	"os/user"
 )
 
 func main() {
-	current, err := user.Current()
+	user, err := user.Current()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Hello %s! \n", current.Username)
-	fmt.Printf("Please type in command\n")
+	fmt.Printf("Hello %s! This is the Monkey programming language!\n", user.Username)
+	fmt.Printf("Feel free to type in commands\n")
 	repl.Start(os.Stdin, os.Stdout)
 }
